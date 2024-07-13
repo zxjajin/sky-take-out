@@ -47,7 +47,7 @@
                 create_user = #{createUser},
             </if>
             <if test="updateUser != null">
-                update_user = #{updateUser},
+                update_user = #{updateUser}
             </if>
         </set>
         where id = #{id}

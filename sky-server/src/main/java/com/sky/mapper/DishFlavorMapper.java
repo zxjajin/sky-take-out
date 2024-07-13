@@ -4,6 +4,8 @@ import com.sky.annotation.AutoFill;
 import com.sky.entity.DishFlavor;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,4 +25,10 @@ public interface DishFlavorMapper {
     void deleteByDishId(Long dishId);
 
     void deleteByDishIds(List<Long> DishIds);
+
+    @Select("select * from dish_flavor where dish_id = #{dishId}")
+    List<DishFlavor> getByDishId(Long dishId);
+
+    @Update("update dish_flavor set name = #{name},value = #{value} where dish_id = #{dishId}")
+    void update(DishFlavor flavor);
 }
