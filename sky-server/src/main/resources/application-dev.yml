@@ -8,10 +8,13 @@ sky:
     password: 123456
   alioss:
     endpoint: xxx
-    access-key-id: x
-    access-key-secret: sxxxx
+    access-key-id: xxx
+    access-key-secret: xxx
     bucket-name: xxx
   redis:
-    host: xxx
+    host: xx
     port: xxx
-    password: xxx
+    password: xx
+  wechat:
+    appid: xx
+    secret: xxx
