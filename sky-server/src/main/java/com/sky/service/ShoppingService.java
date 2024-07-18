@@ -21,4 +21,15 @@ public interface ShoppingService {
      * @return
      */
     List<ShoppingCart> list();
+
+    /**
+     * 清空购物车
+     */
+    void clean();
+
+    /**
+     * 减少购物车
+     * @param shoppingCartDTO
+     */
+    void subShoppingCart(ShoppingCartDTO shoppingCartDTO);
 }
