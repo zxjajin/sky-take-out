@@ -36,6 +36,7 @@ public class OrderController {
     @GetMapping("/conditionSearch")
     @ApiOperation("订单搜索")
     public Result<PageResult> conditionSearch(OrdersPageQueryDTO ordersPageQueryDTO) {
+        log.info("订单搜索：{}", ordersPageQueryDTO);
         PageResult pageResult = orderService.conditionSearch(ordersPageQueryDTO);
         return Result.success(pageResult);
     }
@@ -48,6 +49,7 @@ public class OrderController {
     @GetMapping("/statistics")
     @ApiOperation("各个状态的订单数量统计")
     public Result<OrderStatisticsVO> statistics() {
+        log.info("各个状态的订单数量统计");
         OrderStatisticsVO orderStatisticsVO = orderService.statistics();
         return Result.success(orderStatisticsVO);
     }
@@ -60,6 +62,7 @@ public class OrderController {
     @GetMapping("/details/{id}")
     @ApiOperation("查询订单详情")
     public Result<OrderVO> details(@PathVariable("id") Long id) {
+        log.info("查询订单详情：{}", id);
         OrderVO orderVO = orderService.orderDetail(id);
         return Result.success(orderVO);
     }
@@ -71,6 +74,7 @@ public class OrderController {
     @PutMapping("/confirm")
     @ApiOperation("接单")
     public Result confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO) {
+        log.info("接单：{}", ordersConfirmDTO);
         orderService.confirm(ordersConfirmDTO);
         return Result.success();
     }
@@ -82,6 +86,7 @@ public class OrderController {
     @PutMapping("/rejection")
     @ApiOperation("拒单")
     public Result rejection(@RequestBody OrdersRejectionDTO ordersRejectionDTO) throws Exception {
+        log.info("拒单：{}", ordersRejectionDTO);
         orderService.rejection(ordersRejectionDTO);
         return Result.success();
     }
@@ -93,6 +98,7 @@ public class OrderController {
     @PutMapping("/cancel")
     @ApiOperation("取消订单")
     public Result cancel(@RequestBody OrdersCancelDTO ordersCancelDTO) throws Exception {
+        log.info("取消订单：{}", ordersCancelDTO);
         orderService.cancel(ordersCancelDTO);
         return Result.success();
     }
@@ -104,6 +110,7 @@ public class OrderController {
     @PutMapping("/delivery/{id}")
     @ApiOperation("派送订单")
     public Result delivery(@PathVariable("id") Long id) {
+        log.info("派送订单：{}", id);
         orderService.delivery(id);
         return Result.success();
     }
@@ -116,6 +123,7 @@ public class OrderController {
     @PutMapping("/complete/{id}")
     @ApiOperation("完成订单")
     public Result complete(@PathVariable("id") Long id) {
+        log.info("完成订单：{}", id);
         orderService.complete(id);
         return Result.success();
     }
