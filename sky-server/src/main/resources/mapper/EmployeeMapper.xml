@@ -12,6 +12,20 @@
         </where>
         order by create_time desc
     </select>
+    <select id="countStatus" resultType="java.lang.Integer">
+        select count(id) from employee
+        <where>
+            <if test="beginTime != null">
+                and create_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and create_time &lt;= #{endTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
     <!--void update(Employee employee);-->
     <update id="update" parameterType="employee">
         update employee

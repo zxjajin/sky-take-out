@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import java.util.HashMap;
+
 @Mapper
 public interface EmployeeMapper {
 
@@ -36,4 +38,11 @@ public interface EmployeeMapper {
 
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
+
+    /**
+     * 动态查询员工数量
+     * @param map
+     * @return
+     */
+    Integer countStatus(HashMap<String, Object> map);
 }
