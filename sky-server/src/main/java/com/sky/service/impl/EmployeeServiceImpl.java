@@ -5,9 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.EmployeePasswordDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
 import com.sky.exception.AccountNotFoundException;
@@ -29,9 +31,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeMapper employeeMapper;
-
-    @Autowired
-    private JwtProperties jwtProperties;
 
     /**
      * 员工登录
@@ -150,6 +149,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         BeanUtils.copyProperties(employeeDTO,employee);
 //        employee.setUpdateTime(LocalDateTime.now());
 //        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public void editPassword(EmployeePasswordDTO employeePasswordDTO) {
+        String password = employeePasswordDTO.getOldPassword();
+        //根据id查询员工信息
+        Long id = BaseContext.getCurrentId();
+        Employee employee = employeeMapper.getById(id);
+        //密码比对
+        // 对前端传入的密码进行md5加密，然后再进行比对
+        password = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+        if (!password.equals(employee.getPassword())) {
+            //密码错误
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+        employee.setId(id);
+        employee.setPassword(DigestUtils.md5DigestAsHex(employeePasswordDTO.getNewPassword().getBytes(StandardCharsets.UTF_8)));
         employeeMapper.update(employee);
     }
 }
