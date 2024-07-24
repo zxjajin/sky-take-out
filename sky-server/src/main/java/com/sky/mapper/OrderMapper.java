@@ -61,7 +61,7 @@ public interface OrderMapper {
      * @param map
      * @return
      */
-    Double getMountByMap(HashMap<String, Object> map);
+    Double getMountByMap(HashMap map);
 
     /**
      * 根据动态条件统计订单数量
